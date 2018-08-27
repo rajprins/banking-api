@@ -1,0 +1,27 @@
+description: Collection of bank accounts
+get:
+  is: [pageable]
+  description: Retrieve a list of bank accounts
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/accounts/account_collection.json
+          example: !include ../../examples/accounts/account_collection.json
+    404:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/404-notfound.json
+post:
+  description: Add a new bank account to a customer
+  body:
+    application/json:
+      schema: !include ../../schemas/accounts/account_member.json
+      example: !include ../../examples/accounts/account_member.json
+  responses:
+    201:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/201-created.json

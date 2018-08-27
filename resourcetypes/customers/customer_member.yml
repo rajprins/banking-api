@@ -1,0 +1,41 @@
+description: A single customer
+uriParameters:
+  customer_id:
+    type: string
+get:
+  description: Retrieve a specific customer
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/customers/customer_member.json
+          example: !include ../../examples/customers/customer_member.json
+    404:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/404-notfound.json
+delete:
+  description: Remove a specific customer
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/200-ok.json
+put:
+  description: Update or create a specific customer
+  body:
+    application/json:
+      schema: !include ../../schemas/customers/customer_member.json
+      example: !include ../../examples/customers/customer_member.json
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/200-ok.json
+    201:
+      body:
+        schema: !include ../../schemas/generic/generic_message.json
+        example: !include ../../examples/generic/201-created.json

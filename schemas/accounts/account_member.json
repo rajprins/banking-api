@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description" : "account_member",
+  "properties": {
+    "account_id": {
+      "type": "string"
+    },
+    "account_type": {
+      "description" : "one of [checking,savings]",
+      "type": "string"
+    },    
+    "customer_id": {
+      "description" : "reference to customer account",
+      "type": "string"
+    },
+    "balance": {
+      "type": "integer"
+    }
+  },
+  "id": "/",
+  "required": [
+    "account_id",
+    "account_type",
+    "customer_id",
+    "balance"
+  ]
+}

@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: ACME Banking API
+version: 0.1
+baseUri: http://www.placeholder.com/api/{version}/
+
+
+/customers:
+  get:
+    description: "[FR-005] Retrieve a full list of customers"
+  post:
+    description: "[FR-010] Add a new customer"
+  /{customer_id}:
+    get:
+      description: "[FR-015] Retrieve details on a particular customer"
+    put:
+      description: "[FR-002] Update or create a specific customer"
+    /accounts:
+      get:
+        description: "[FR-012] Get a list of accounts belonging to a particular customer"
+      post:
+        description: "[FR-006] Add an account to a customer"
+      /{account_id}:
+        get:
+          description: "[FR-011] Retrieve a detailed account report"
+        put:
+          description: "[FR-001] Update bank account information"
+        delete:
+          description: "[FR-007] Remove an account from a customer"
+        /outgoingTransfers:
+          get:
+            description: "[FR-008] Retrieve a list of a customer’s outgoing transfers"
+          post:
+            description: "[FR-009] Create an outgoing transfer from a customer’s account to another account"
+          /{transfer_id}:
+            get:
+              description: "[FR-014] Retrieve details on a particular outgoing transfer"
+        /incomingTransfers:
+          get:
+            description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
+          /{transfer_id}:
+            get:
+              description: "[FR-003] Retrieve details on a particular incoming transfer"
+/transfers:
+ get:
+   description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."

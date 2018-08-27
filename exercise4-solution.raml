@@ -1,0 +1,225 @@
+#%RAML 1.0
+title: ACME Banking API
+version: 2.0
+baseUri: http://www.placeholder.com/api/{version}/
+
+documentation:
+  - title: ACME Banking API
+    content: This is the full API for instructors to use as a sample solution for the API Design and Architecture class.
+
+mediaType: application/json
+
+schemas:
+  customer_collection: !include schemas/customers/customer_collection.json
+  customer_member: !include schemas/customers/customer_member.json
+  account_collection: !include schemas/accounts/account_collection.json
+  account_member: !include schemas/accounts/account_member.json
+  transfer_collection: !include schemas/transfers/transfer_collection.json
+  transfer_member: !include schemas/transfers/transfer_member.json
+  generic_message: !include schemas/generic/generic_message.json
+
+traits:
+  secured: !include traits/basic_authenticated.yml
+  searchable: !include traits/searchable.yml
+  orderable: !include traits/orderable.yml
+  pageable: !include traits/pageable.yml
+
+securitySchemes:
+  oauth_2_0: !include security/oauth_2_0.yml
+
+/customers:
+   is: [secured]
+   description: Full collection of the bank's customers
+   get:
+      is: [pageable]
+      description: "[FR-005] Retrieve a full list of customers"
+      responses:
+         200:
+            body:
+               schema: customer_collection
+               example: !include examples/customers/customer_collection.json
+         404:
+            body:
+               schema: generic_message
+               example: !include examples/generic/404-notfound.json
+   post:
+      description: "[FR-010] Add a new customer"
+      body:
+         schema: customer_member
+         example: !include examples/customers/customer_member.json
+      responses:
+         201:
+            body:
+              schema: generic_message
+              example: !include examples/generic/201-created.json
+   /{customer_id}:
+      description: A single customer, identified by customer_ID
+      uriParameters:
+        customer_id:
+          type: string
+      get:
+         description: "[FR-015] Retrieve details on a particular customer"
+         responses:
+            200:
+               body:
+                  schema: customer_member
+                  example: !include examples/customers/customer_member.json
+            404:
+               body:
+                  schema: generic_message
+                  example: !include examples/generic/404-notfound.json
+      delete:
+         description: Remove a specific customer
+         responses:
+            200:
+               body:
+                  schema: generic_message
+                  example: !include examples/generic/200-ok.json
+      put:
+         description: "[FR-002] Update or create a specific customer"
+         body:
+            schema: customer_member
+            example: !include examples/customers/customer_member.json
+         responses:
+            200:
+               body:
+                  schema: generic_message
+                  example: !include examples/generic/200-ok.json
+            201:
+               body:
+                  schema: generic_message
+                  example: !include examples/generic/201-created.json
+      /accounts:
+         description: Full connection of bank accounts for a specific customer
+         get:
+            is: [pageable]
+            description: "[FR-012] Get a list of accounts belonging to a particular customer"
+            responses:
+               200:
+                  body:
+                     schema: account_collection
+                     example: !include examples/accounts/account_collection.json
+               404:
+                  body:
+                     schema: generic_message
+                     example: !include examples/generic/404-notfound.json
+         post:
+            description: "[FR-006] Add an account to a customer"
+            body:
+               schema: account_member
+               example: !include examples/accounts/account_member.json
+            responses:
+               201:
+                  body:
+                     schema: generic_message
+                     example: !include examples/generic/201-created.json
+         /{account_id}:
+            description: A single account, identified by account ID
+            uriParameters:
+              account_id:
+                type: string
+            get:
+               description: "[FR-011] Retrieve a detailed account report"
+               responses:
+                  200:
+                     body:
+                        schema: account_member
+                        example: !include examples/accounts/account_member.json
+                  404:
+                     body:
+                        schema: generic_message
+                        example: !include examples/generic/404-notfound.json
+            delete:
+               description: "[FR-007] Remove an account from a customer"
+               responses:
+                  200:
+                     body:
+                        schema: generic_message
+                        example: !include examples/generic/200-ok.json
+            put:
+               description: "[FR-001] Update bank account information"
+               body:
+                  schema: account_member
+                  example: !include examples/accounts/account_member.json
+               responses:
+                  200:
+                    body:
+                      schema: generic_message
+                      example: !include examples/generic/200-ok.json
+                  201:
+                    body:
+                      schema: generic_message
+                      example: !include examples/generic/201-created.json
+            /outgoingTransfers:
+              description: Collection of incoming transfers for a particular bank account
+              get:
+                is: [pageable]
+                description: "[FR-008] Retrieve a list of a customer’s outgoing transfers"
+                responses:
+                  200:
+                    body:
+                      schema: transfer_collection
+                      example: !include examples/transfers/transfer_collection.json
+              post:
+                description: "[FR-009] Create an outgoing transfer from a customer’s account to another account"
+                body:
+                  schema: transfer_member
+                  example: !include examples/transfers/transfer_member.json
+                responses:
+                  201:
+                    body:
+                      schema: generic_message
+                      example: !include examples/generic/201-created.json
+              /{transfer_id}:
+                description: A single transfer, identified by transfer_id
+                uriParameters:
+                  transfer_id:
+                    type: string
+                get:
+                  description: "[FR-014] Retrieve details on a particular outgoing transfer"
+                  responses:
+                    200:
+                      body:
+                        schema: transfer_member
+                        example: !include examples/transfers/transfer_member.json
+                    404:
+                      body:
+                        schema: generic_message
+                        example: !include examples/generic/404-notfound.json
+            /incomingTransfers:
+              description: Collection of incoming transfers for a particular bank account
+              get:
+                is: [pageable]
+                description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
+                responses:
+                  200:
+                    body:
+                      schema: transfer_collection
+                      example: !include examples/transfers/transfer_collection.json
+              /{transfer_id}:
+                description: A single transfer, identified by transfer_ID
+                uriParameters:
+                  transfer_id:
+                    type: string
+                get:
+                  description: "[FR-003] Retrieve details on a particular incoming transfer"
+                  responses:
+                    200:
+                      body:
+                        schema: transfer_member
+                        example: !include examples/transfers/transfer_member.json
+                    404:
+                      body:
+                        schema: generic_message
+                        example: !include examples/generic/404-notfound.json
+/transfers:
+  description: Collection of all transfers, both incoming and outgoing
+  is: [secured]
+  get:
+    is: [pageable]
+    description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."
+    responses:
+      200:
+        body:
+          schema: transfer_collection
+          example: !include examples/transfers/transfer_collection.json

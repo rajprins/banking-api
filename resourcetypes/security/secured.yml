@@ -1,0 +1,4 @@
+get:
+  is: [basic_authenticated]
+post:
+  is: [basic_authenticated]

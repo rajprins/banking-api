@@ -1,0 +1,27 @@
+description: Full collection of the bank's customers
+get:
+  is: [pageable]
+  description: Retrieve a list of all the bank's customers.
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/customers/customer_collection.json
+          example: !include ../../examples/customers/customer_collection.json
+    404:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/404-notfound.json
+post:
+  description: Adds a new user to the bank's customer listing
+  body:
+    application/json:
+      schema: !include ../../schemas/customers/customer_member.json
+      example: !include ../../examples/customers/customer_member.json
+  responses:
+    201:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/201-created.json

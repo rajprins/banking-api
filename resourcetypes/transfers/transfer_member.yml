@@ -1,0 +1,17 @@
+description: This is a single transfer from one account to another
+uriParameters:
+  transfer_id:
+    type: string
+get:
+  description: Retrieve a specific transfer
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/transfers/transfer_member.json
+          example: !include ../../examples/transfers/transfer_member.json
+    404:
+      body:
+        application/json:
+          schema: !include ../../schemas/generic/generic_message.json
+          example: !include ../../examples/generic/404-notfound.json

@@ -1,0 +1,26 @@
+[customer_collection]
+get     [FR-005] Retrieve a full list of customers
+post    [FR-010] Add a new customer
+[customer_member]
+get
+delete
+put     [FR-002] Update or create a specific customer
+[account_collection]
+get     [FR-012] Get a list of accounts belonging to a particular customer
+post    [FR-006] Add an account to a customer
+[account_member]
+get     [FR-011] Retrieve a detailed account report
+delete  [FR-007] Remove an account from a customer
+put     [FR-001] Update bank account information
+[outgoingTransfers_collection]
+get     [FR-008] Retrieve a list of a customer’s outgoing transfers
+post    [FR-009] Create an outgoing transfer from a customer’s account to another account
+[outgoingTransfer_member]
+get     [FR-014] Retrieve details on a particular outgoing transfer
+[incomingTransfers_collection]
+get     [FR-013] Retrieve a list of incoming transfers for a particular bank account
+post
+[incomingTransfer_member]
+get     [FR-003] Retrieve details on a particular incoming transfer
+[transfer_collection]
+get     [FR-004] Retrieve a list of all transfers, both incoming and outgoing.

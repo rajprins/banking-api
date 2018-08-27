@@ -1,0 +1,14 @@
+[
+  {
+    "account_id" : "a2esd212343123",
+    "account_type" : "checking",
+    "customer_id" : "1234",
+    "balance": 1252.00
+  },
+  {
+    "account_id" : "a3esd212343123",
+    "account_type" : "savings",
+    "customer_id" : "4321",
+    "balance": 13000.00              
+  }
+]

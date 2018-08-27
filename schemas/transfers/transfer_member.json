@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description" : "transfer_member",
+  "properties": {
+    "sourceAccount_id": {
+      "type": "string",
+      "id": "sourceAccount_id"
+    },
+    "targetAccount_id": {
+      "type": "string",
+      "id": "targetAccount_id"
+    },
+    "amount": {
+      "type": "integer",
+      "id": "amount"
+    },
+    "description": {
+      "type": "string",
+      "id": "description"
+    }
+  },
+  "id": "/",
+  "required": [
+    "sourceAccount_id",
+    "targetAccount_id",
+    "amount",
+    "description"
+  ]
+}

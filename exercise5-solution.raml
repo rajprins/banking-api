@@ -1,0 +1,47 @@
+#%RAML 1.0
+title: ACME Banking API
+version: 3.0
+baseUri: http://www.placeholder.com/api/{version}/
+
+documentation:
+  - title: ACME Banking API
+    content: |
+      This is the full API for instructors to use as a sample solution for the API Design and Architecture class.
+
+mediaType: application/json
+
+resourceTypes:
+  generic_collection  : !include resourcetypes/generic/generic_collection.yml
+  generic_member      : !include resourcetypes/generic/generic_member.yml
+  customer_collection : !include resourcetypes/customers/customer_collection.yml
+  customer_member     : !include resourcetypes/customers/customer_member.yml
+  account_collection  : !include resourcetypes/accounts/account_collection.yml
+  account_member      : !include resourcetypes/accounts/account_member.yml
+  transfer_collection : !include resourcetypes/transfers/transfer_collection.yml
+  transfer_member     : !include resourcetypes/transfers/transfer_member.yml
+
+traits:
+  searchable: !include traits/searchable.yml
+  orderable: !include traits/orderable.yml
+  pageable: !include traits/pageable.yml
+  basic_authenticated: !include traits/basic_authenticated.yml
+
+
+/customers:
+  type: customer_collection
+  /{customer_id}:
+    type: customer_member
+    /accounts:
+      type: account_collection
+      /{account_id}:
+        type: account_member
+        /outgoingTransfers:
+          type: transfer_collection
+          /{transfer_id}:
+            type: transfer_member
+        /incomingTransfers:
+          type: transfer_collection
+          /{transfer_id}:
+            type: transfer_member
+/transfers:
+ type: transfer_collection

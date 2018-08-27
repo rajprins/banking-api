@@ -1,0 +1,4 @@
+usage: This resourceType should be used for any single item
+description: This is a single member
+get:
+  description: Get a specific <<resourcePathName|!singularize>>
