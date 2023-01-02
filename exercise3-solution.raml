@@ -1,21 +1,20 @@
 #%RAML 1.0
 title: ACME Banking API
-version: 1.0
-baseUri: http://www.placeholder.com/api/{version}/
-
+version: 1
+baseUri: 'http://www.placeholder.com/api/{version}/'
 documentation:
   - title: ACME Banking API
-    content: |
-      This is the partial API for instructors to use as a sample solution for the API Design and Architecture class.
-
+    content: >
+      This is the partial API for instructors to use as a sample solution for
+      the API Design and Architecture class.
 mediaType: application/json
 
 /customers:
-  description: "The full collection of all users with accounts at the bank"
+  description: The full collection of all users with accounts at the bank
   get:
-    description: "[FR-005] Retrieve a full list of customers"
+    description: '[FR-005] Retrieve a full list of customers'
     responses:
-      200:
+      '200':
         body:
           example: |
             [
@@ -32,7 +31,7 @@ mediaType: application/json
                 "dob": "01/01/1970"
               }
             ]
-      404:
+      '404':
         body:
           example: |
             {
@@ -40,7 +39,7 @@ mediaType: application/json
               "message" : "Resource not found."
             }
   post:
-    description: "[FR-010] Add a new customer"
+    description: '[FR-010] Add a new customer'
     body:
       example: |
         {
@@ -49,22 +48,22 @@ mediaType: application/json
           "dob": "01/01/1970"
         }
     responses:
-      201:
+      '201':
         body:
           example: |
             {
               "http.statuscode" : 201,
               "message" : "Resource created."
             }
-  /{customer_id}:
+  '/{customer_id}':
     uriParameters:
       customer_id:
         displayName: Customer ID
         type: string
     get:
-      description: "[FR-015] Retrieve details on a particular customer"
+      description: '[FR-015] Retrieve details on a particular customer'
       responses:
-        200:
+        '200':
           body:
             example: |
               {
@@ -73,7 +72,7 @@ mediaType: application/json
                 "description": "This is the ACME account of Ray Charles",
                 "dob": "01/01/1970"
               }
-        404:
+        '404':
           body:
             example: |
               {
@@ -83,7 +82,7 @@ mediaType: application/json
     delete:
       description: Delete a specific customer
       responses:
-        200:
+        '200':
           body:
             example: |
               {
@@ -91,7 +90,7 @@ mediaType: application/json
                 "message" : "Operation completed successfully."
               }
     put:
-      description: "[FR-002] Update or create a specific customer"
+      description: '[FR-002] Update or create a specific customer'
       body:
         example: |
           {
@@ -101,14 +100,14 @@ mediaType: application/json
             "dob": "01/01/1970"
           }
       responses:
-        200:
+        '200':
           body:
             example: |
               {
                 "http.statuscode" : 200,
                 "message" : "Operation completed successfully."
               }
-        201:
+        '201':
           body:
             example: |
               {
@@ -117,9 +116,9 @@ mediaType: application/json
               }
     /accounts:
       get:
-        description: "[FR-012] Get a list of accounts belonging to a particular customer"
+        description: '[FR-012] Get a list of accounts belonging to a particular customer'
         responses:
-          200:
+          '200':
             body:
               example: |
                 [
@@ -137,7 +136,7 @@ mediaType: application/json
                   }
                 ]
       post:
-        description: "[FR-006] Add an account to a customer"
+        description: '[FR-006] Add an account to a customer'
         body:
           example: |
             {
@@ -146,21 +145,21 @@ mediaType: application/json
               "balance": 0.00
             }
         responses:
-          201:
+          '201':
             body:
               example: |
                 {
                   "http.statuscode" : 201,
                   "message" : "Resource created."
                 }
-      /{account_id}:
+      '/{account_id}':
         uriParameters:
           account_id:
             type: integer
         get:
-          description: "[FR-011] Retrieve a detailed account report"
+          description: '[FR-011] Retrieve a detailed account report'
           responses:
-            200:
+            '200':
               body:
                 example: |
                   {
@@ -169,7 +168,7 @@ mediaType: application/json
                     "customer_id" : "1234",
                     "balance": 113300.00
                   }
-            404:
+            '404':
               body:
                 example: |
                   {
@@ -177,16 +176,16 @@ mediaType: application/json
                     "message" : "Resource not found."
                   }
         put:
-          description: "[FR-001] Update bank account information"
+          description: '[FR-001] Update bank account information'
           responses:
-            200:
+            '200':
               body:
                 example: |
                   {
                     "http.statuscode" : 200,
                     "message" : "Operation completed successfully."
                   }
-            201:
+            '201':
               body:
                 example: |
                   {
@@ -194,9 +193,9 @@ mediaType: application/json
                     "message" : "Resource created."
                   }
         delete:
-          description: "[FR-007] Remove an account from a customer"
+          description: '[FR-007] Remove an account from a customer'
           responses:
-            200:
+            '200':
               body:
                 example: |
                   {
@@ -205,9 +204,9 @@ mediaType: application/json
                   }
         /outgoingTransfers:
           get:
-            description: "[FR-008] Retrieve a list of a customer’s outgoing transfers"
+            description: '[FR-008] Retrieve a list of a customer’s outgoing transfers'
             responses:
-              200:
+              '200':
                 body:
                   example: |
                     [
@@ -225,20 +224,22 @@ mediaType: application/json
                       }
                     ]
           post:
-            description: "[FR-009] Create an outgoing transfer from a customer’s account to another account"
+            description: >-
+              [FR-009] Create an outgoing transfer from a customer’s account to
+              another account
             responses:
-              201:
+              '201':
                 body:
                   example: |
                     {
                       "http.statuscode" : 201,
                       "message" : "Resource created."
                     }
-          /{transfer_id}:
+          '/{transfer_id}':
             get:
-              description: "[FR-014] Retrieve details on a particular outgoing transfer"
+              description: '[FR-014] Retrieve details on a particular outgoing transfer'
               responses:
-                200:
+                '200':
                   body:
                     example: |
                       {
@@ -247,7 +248,7 @@ mediaType: application/json
                         "amount": 1000.00,
                         "description": "This is the description of a particular transaction that you provided at creation."
                       }
-                404:
+                '404':
                   body:
                     example: |
                       {
@@ -256,9 +257,11 @@ mediaType: application/json
                       }
         /incomingTransfers:
           get:
-            description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
+            description: >-
+              [FR-013] Retrieve a list of incoming transfers for a particular
+              bank account
             responses:
-              200:
+              '200':
                 body:
                   example: |
                     [
@@ -275,11 +278,11 @@ mediaType: application/json
                         "description": "rent June 2015"
                       }
                     ]
-          /{transfer_id}:
+          '/{transfer_id}':
             get:
-              description: "[FR-003] Retrieve details on a particular incoming transfer"
+              description: '[FR-003] Retrieve details on a particular incoming transfer'
               responses:
-                200:
+                '200':
                   body:
                     example: |
                       {
@@ -288,7 +291,7 @@ mediaType: application/json
                         "amount": 1000.00,
                         "description": "This is the description of a particular transaction that you provided at creation."
                       }
-                404:
+                '404':
                   body:
                     example: |
                       {
@@ -296,23 +299,23 @@ mediaType: application/json
                         "message" : "Resource not found."
                       }
 /transfers:
- get:
-   description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."
-   responses:
-     200:
-       body:
-         example: |
-           [
-             {
-               "sourceAccount_id" : "3523djfg329548",
-               "targetAccount_id" : "a2esd212343123",
-               "amount": 27.00,
-               "description": "My share of last night's dinner"
-             },
-             {
-               "sourceAccount_id" : "3523djfg123123",
-               "targetAccount_id" : "a2esd212343123",
-               "ammount": 1324.00,
-               "description": "rent June 2015"
-             }
-           ]
+  get:
+    description: '[FR-004] Retrieve a list of all transfers, both incoming and outgoing.'
+    responses:
+      '200':
+        body:
+          example: |
+            [
+              {
+                "sourceAccount_id" : "3523djfg329548",
+                "targetAccount_id" : "a2esd212343123",
+                "amount": 27.00,
+                "description": "My share of last night's dinner"
+              },
+              {
+                "sourceAccount_id" : "3523djfg123123",
+                "targetAccount_id" : "a2esd212343123",
+                "ammount": 1324.00,
+                "description": "rent June 2015"
+              }
+            ]

@@ -57,9 +57,23 @@ The goal is to design an API based on a set of requirements. Your task is to tra
 
 **Exercise 1: API basics**  
 Start white-boarding the basics of the API. 
-* Focus only on identifying resources (both collections and members) and methods.  
-* Remember: Resources = nouns, methods = HTTP verbs.
-* Remain at this high­ level.
+* Focus only on identifying *resources* and *methods*.
+  * Remember: Resources = nouns, methods = HTTP verbs.
+  * Distinguish resources between collections and members
+* Do not use any modeling or definition language yet, just plain English.
+* Remain at a high­ level (just resources and methodes)
+
+Examples:
+```
+Resource: cars
+    GET #Retrieve all cars in collection
+    POST #Add a new car to the collection of cars
+
+Resource: car
+    GET #Get details of a specific car
+    PUT #Update details of a specific car
+    DELETE #Delete car from collection of cars
+```
 
 **Exercise 2: API definition with RAML**  
 Based on the identified resources and operations, start working on a [RAML](http://raml.org) based API definition.  
